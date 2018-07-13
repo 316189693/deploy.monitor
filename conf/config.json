@@ -1,0 +1,4 @@
+{
+   "log_folder": "/var/log/deploy_log/",
+   "lib_folder": "/var/www/deploy.monitoring/lib/"
+}

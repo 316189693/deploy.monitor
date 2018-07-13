@@ -1,0 +1,13 @@
+image: phpunit/phpunit:5.0.3
+
+pipelines:
+  branches:
+    master:
+      - step:
+          script: # Modify the commands below to build your repository.
+            - mkdir -p ~/.ssh
+            - ssh-keyscan dev.freightapp.com > my_known_hosts
+            - cat my_known_hosts >> ~/.ssh/known_hosts
+            - (umask  077 ; echo $MY_SSH_KEY | base64 --decode -i > ~/.ssh/id_rsa)
+            - cat ~/.ssh/id_rsa
+            - ssh -o "StrictHostKeyChecking no" jim@dev.freightapp.com "./git.sh  git_tms_deploy.sh"

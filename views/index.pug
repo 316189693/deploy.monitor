@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  -  var headTitles = ["server", "script", "execute date", "status"]
+  div(class='container')
+     each val, index in projectDeployObject
+       div(class='container-fluid border margin-bottom-30')
+         p(class='text-lg-left font-weight-bold')=index.replace('git_', "").replace(".sh", "")
+         table(class='table table-striped table-sm')
+           thead
+             tr
+               each item in  headTitles
+                 th(scope="col")= item
+           tbody
+             each obj, i in val
+               tr(class=i%2 == 0 ? 'odd' : 'even')
+                 td= obj.deploy_server
+                 td= obj.deploy_script
+                 td= obj.deploy_date
+                 td(class=obj.deploy_status == 'failed' ?' text-danger' : 'text-success')= obj.deploy_status
